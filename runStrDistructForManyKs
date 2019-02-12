@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source rsEnvVars.sh
+
+# Create output directory
+mkdir -p ${outputdir}
+
+# Extract 3-letter ids of populations from STRUCTURE input project file
+tail -n +3 ${strinput} | cut -f 1 -d " " | cut -c 1-3 > ${popfile}
+
+# In case any pm is missing prepend this:
+perl -I/usr/local/lib/perl5/site_perl/5.18.1/ ./distructForManyKs.pl --id ${jobid} --dir ${outputdir} --podtopop ${popfile} --labels ${labelsfile} --file ${strresultszip}

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+source rsEnvVars.sh
+
+# Extract 3-letter ids of populations from STRUCTURE input project file
+extractIds() {
+	tail -n +3 "${strinput}" | cut -f 1 -d " " | cut -c 1-3 > "${popfile}"
+}
+
+runClumpak() {
+	# In case any Perl Module (.pm) is missing prepend this:
+	# perl -I/usr/local/lib/perl5/site_perl/5.18.1/
+	CLUMPAK.pl \
+		--id "${jobid}" \
+		--dir "${outputdir}" \
+		--podtopop "${popfile}" \
+		--labels "${labelsfile}" \
+	#	--clumppsearchmethod 2 \
+	#	--clumpprepeats 1000 \
+		--file "${strresultszip}" }
+
+extractIds
+runClumpak
