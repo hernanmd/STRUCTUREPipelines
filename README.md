@@ -1,6 +1,6 @@
 # Description
 
-Parallelization of Structure workflow to run in a Cluster environment.
+CLUMPAK analysis of Structure (StrAuto) results.
 
 # Installation
 
@@ -28,10 +28,11 @@ cd runstructure
 ## Run Main Pipeline (CLUMPAK)
 
   - See [http://clumpak.tau.ac.il/index.html](http://clumpak.tau.ac.il/index.html) for details.
-  - Read environment variables as parameters.
-  - Create the output directory.
-  - Build the populations file.
-  - Run CLUMPAK perl script
+  - The following script perform the following actions:
+    - Read environment variables as parameters.
+    - Create the output directory.
+    - Build the populations file.
+    - Run CLUMPAK perl script
 
 
 ```bash
@@ -40,12 +41,11 @@ cd runstructure
 
 ## Run Distruct for many Ks
 
-The following script will:
-
-  - Read environment variables as parameters.
-  - Create the output directory.
-  - Build the populations file.
-  - Run DistructForManyKs perl script
+  - The following script perform the following actions:
+    - Read environment variables as parameters.
+    - Create the output directory.
+    - Build the populations file.
+    - Run DistructForManyKs perl script
 
 ```bash
 ./runStrDistructForManyKs
