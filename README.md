@@ -1,6 +1,6 @@
 # Description
 
-CLUMPAK analysis of Structure (StrAuto) results.
+This repository contains scripts to run locally [CLUMPAK](http://clumpak.tau.ac.il/index.html) analysis of STRUCTURE results produced by [StrAuto](https://www.crypticlineage.net/software/strauto/) and generate [distruct](https://www.crypticlineage.net/software/distruct/) figures.
 
 # Installation
 
@@ -11,13 +11,29 @@ cd runstructure
 
 # Requirements
 
-  - Structure input file (.str)
-  - Structure results should be already available in a .zip file.
+  - STRUCTURE input file (.str). 
+    - The default name used in the configuration files is project_data.str
+  - StrAuto results should be already available in a .zip file
+    - The results should be zipped into a single .zip file.
+	- Default name is stresults.zip, with the following structure:
+
+```bash
+       k1.zip
+               k1/
+						project_data_k1_run10_f
+						project_data_k2_run1_f
+						...
+       k2.zip
+               k2/
+                       project_data_k1_run10_f
+                       project_data_k2_run1_f
+						...
+```
 
 # Usage
 
-  - Put your results into a subdirectory
-  - Edit rsEnvVars.sh
+  - Put your StrAuto results into a subdirectory
+  - Edit environment variables in the file rsEnvVars.sh
 
 ## Download CLUMPAK
 
@@ -27,13 +43,11 @@ cd runstructure
 
 ## Run Main Pipeline (CLUMPAK)
 
-  - See [http://clumpak.tau.ac.il/index.html](http://clumpak.tau.ac.il/index.html) for details.
-  - The following script perform the following actions:
-    - Read environment variables as parameters.
+  - The runStrClumpak script performs the following actions:
+    - Read environment variables in rsEnvVars.sh as parameters.
     - Create the output directory.
     - Build the populations file.
-    - Run CLUMPAK perl script
-
+    - Run the CLUMPAK Perl script
 
 ```bash
 ./runStrClumpak
