@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Input: PED file where the first column contains family name
+# Output: a new directory with all the names of the families joined with - and the PED/MAP files copied into
+
+famdir=$(cut -f1 "$1" | sort | uniq | tr "\n" "-")
+mkdir -v $famdir
+cp "$1" $famdir
