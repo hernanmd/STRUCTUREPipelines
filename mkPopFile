@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Input: PED file name WITHOUT the .ped extension
+# Output: popfile suitable for Structure_threader plots
+
+inped="$1"
+popfile="popfile"
+index=1
+
+for fam in $(cut -f 1 "$inped".ped | sort | uniq); do
+	# Generate a .log file for each family with count information
+	# It could be done without PLINK but there is no guarantee that pedigree/individual information is sorted
+	echo $fam | plink --file "$inped" --out "$inped"_$fam --cow --make-bed --keep-fam /dev/stdin;
+	# Extract number of individuals remaining from the log file
+	reminds=$(grep "^\--keep-fam" "$inped"_$fam.log | tr -dc '0-9')
+	# Write population file line as described in https://github.com/StuntsPT/Structure_threader/blob/master/docs/usage.md
+	echo -e "$fam\t$reminds\t$index" >> $popfile
+	index=$((index+1))
+done
