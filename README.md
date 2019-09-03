@@ -70,13 +70,20 @@ cd runstructure
 
 ## Pipeline Structure_threader : Installation
 
+## Pipeline Structure_threader : Usage
+
+Last parameter is the number of Ks:
+
+```bash
+ ./runFsStrThreader.sh project_input/file.bed project_output/ popfile 24
+ ```
 
 ## Pipeline fastSTRUCTURE with Docker : Installation
 
 Install Docker
 Under Windows: Launch MSYS2
 Under Linux/OSX: Launch Terminal
-Fetch fastStructure docker image from (https://hub.docker.com/r/dockerbiotools/faststructure)[https://hub.docker.com/r/dockerbiotools/faststructure]
+Fetch fastStructure docker image from [https://hub.docker.com/r/dockerbiotools/faststructure](https://hub.docker.com/r/dockerbiotools/faststructure)
 
 ```bash
 docker pull dockerbiotools/faststructure
