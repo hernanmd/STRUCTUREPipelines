@@ -3,7 +3,7 @@
 This repository contains three pipelines with scripts to run locally several types of STRUCTURE analysis :
 
   - Pipeline [CLUMPAK](http://clumpak.tau.ac.il/index.html) analysis of STRUCTURE results produced by [StrAuto](https://www.crypticlineage.net/software/strauto/) and generate [distruct](https://www.crypticlineage.net/software/distruct/) figures.
-  - Pipeline Structure_threader with STRUCTURE or fastStructure
+  - Pipeline Structure_threader with fastStructure
   - Pipeline fastStructure with Docker
 
 # Global Installation
