@@ -72,11 +72,34 @@ cd runstructure
 
 ## Pipeline Structure_threader : Usage
 
-Last parameter is the number of Ks:
+### Create a "popfile" 
 
 ```bash
+# Create the required popfile from the PED file. 
+# The input is a PED file name which should be specified WITHOUT the .ped extension
+# The output is a new file named "popfile" suitable for Structure_threader plots
+./mkPopFile ../STRUCTURE_PIPrun/project_input/file
+```
+
+### Edit the "mainparams" and optionally the "extraparams" file
+
+### Run analysis
+
+```bash
+# Run Structure_threader 
+# 1st parameter is the BED file (using PED is not valid for now)
+# 2nd parameter is the DIRECTORY where output will be written
+# 3rd and last parameter is the number of Ks:
  ./runFsStrThreader.sh project_input/file.bed project_output/ popfile 24
- ```
+```
+
+### Plot results
+
+```bash
+# The Structure_threader already generates a plots subdirectory with HTML/SVG paired files into the output directory
+# However if you whish to generate a "Comparative Plots" output, run the following script
+./runPlotStrThreader project_output/ popfile 24
+```
 
 ## Pipeline fastSTRUCTURE with Docker : Installation
 
