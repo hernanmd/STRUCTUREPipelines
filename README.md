@@ -1,3 +1,5 @@
+# Table of Contents
+
 - [Description](#description)
 - [General Installation](#general-installation)
 - [Pipeline CLUMPAK(StrAuto) + distruct](#pipeline-clumpakstrauto--distruct)
