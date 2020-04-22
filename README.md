@@ -1,3 +1,23 @@
+- [Description](#description)
+- [General Installation](#general-installation)
+- [Pipeline CLUMPAK(StrAuto) + distruct](#pipeline-clumpakstrauto--distruct)
+  - [Requirements](#requirements)
+  - [Usage](#usage)
+  - [Download CLUMPAK](#download-clumpak)
+  - [Run Main Pipeline (CLUMPAK)](#run-main-pipeline-clumpak)
+  - [Run Distruct for many Ks](#run-distruct-for-many-ks)
+- [Pipeline Structure_threader](#pipeline-structure_threader)
+  - [Installation](#installation)
+  - [Usage](#usage-1)
+    - [Create a "popfile"](#create-a-popfile)
+    - [Edit the "mainparams" and optionally the "extraparams" file](#edit-the-mainparams-and-optionally-the-extraparams-file)
+    - [Run analysis](#run-analysis)
+    - [Plot results](#plot-results)
+- [Pipeline fastSTRUCTURE with Docker](#pipeline-faststructure-with-docker)
+  - [Installation](#installation-1)
+  - [Run image under Windows MSYS2 or WSL](#run-image-under-windows-msys2-or-wsl)
+  - [Run image under Linux/OSX](#run-image-under-linuxosx)
+
 # Description
 
 This repository contains three pipelines with scripts to run locally several types of STRUCTURE analysis :
@@ -6,14 +26,16 @@ This repository contains three pipelines with scripts to run locally several typ
   - Pipeline Structure_threader with fastStructure
   - Pipeline fastStructure with Docker
 
-# Global Installation
+# General Installation
 
 ```bash
 git clone https://github.com/hernanmd/STRUCTUREPipelines.git
 cd runstructure
 ```
 
-## Pipeline CLUMPAK(StrAuto) + distruct : Requirements
+# Pipeline CLUMPAK(StrAuto) + distruct
+
+## Requirements
 
   - STRUCTURE input file (.str). 
     - The default name used in the configuration files is project_data.str
@@ -34,17 +56,17 @@ cd runstructure
 			...
 ```
 
-## Pipeline CLUMPAK(StrAuto) + distruct : Usage
+## Usage
 
   - Put your StrAuto results into a subdirectory
   - Edit environment variables in the file rsEnvVars.sh
 
-## Pipeline CLUMPAK(StrAuto) + distruct : Download CLUMPAK
+## Download CLUMPAK
 
 ```bash
 ./rsGetClumpak.sh
 ```
-## Pipeline CLUMPAK(StrAuto) + distruct : Run Main Pipeline (CLUMPAK)
+## Run Main Pipeline (CLUMPAK)
 
   - The runStrClumpak script performs the following actions:
     - Read environment variables in rsEnvVars.sh as parameters.
@@ -56,7 +78,7 @@ cd runstructure
 ./runStrClumpak
 ```
 
-## Pipeline CLUMPAK(StrAuto) + distruct : Run Distruct for many Ks
+## Run Distruct for many Ks
 
   - The following script perform the following actions:
     - Read environment variables as parameters.
@@ -68,9 +90,13 @@ cd runstructure
 ./runStrDistructForManyKs
 ```
 
-## Pipeline Structure_threader : Installation
+# Pipeline Structure_threader
 
-## Pipeline Structure_threader : Usage
+## Installation
+
+WiP
+
+## Usage
 
 ### Create a "popfile" 
 
@@ -101,7 +127,9 @@ cd runstructure
 ./runPlotStrThreader project_output/ popfile 24
 ```
 
-## Pipeline fastSTRUCTURE with Docker : Installation
+# Pipeline fastSTRUCTURE with Docker 
+
+## Installation
 
 Install Docker
 Under Windows: Launch MSYS2
@@ -112,7 +140,7 @@ Fetch fastStructure docker image from [https://hub.docker.com/r/dockerbiotools/f
 docker pull dockerbiotools/faststructure
 ```
 
-## Pipeline fastSTRUCTURE with Docker : Run image under Windows MSYS2
+## Run image under Windows MSYS2 or WSL
 
 ```bash
 # Get the image id from the following command
@@ -120,12 +148,12 @@ docker images
 # Make a directory for your dataset
 mkdir data # Or whatever your population name is
 # Install the winpty package if necessary
-# pacman -Ss winpty
+# pacman -Ss winpty (or apt get winpty)
 # Run the image
 winpty docker run -it -v /${PWD}/data/:/fastStructure/data 6ca
 ```
 
-## Pipeline fastSTRUCTURE with Docker : Run image under Linux/OSX
+## Run image under Linux/OSX
 
 ```bash
 # Get the image id from the following command
