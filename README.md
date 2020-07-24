@@ -100,6 +100,11 @@ WiP
 
 ## Usage
 
+To use this pipeline you should have your input files both in PED/MAP format (to generate the populations file) and in BED/BIM/FAM format (required by fastSTRUCTURE).
+ALSO the structure input file, which could be generated from PLINK using the "--recode structure" option.
+It is highly recommended to put the input files in a separate subdirectory.
+The output directory will be created if not already present.
+
 ### Create a "popfile" 
 
 ```bash
@@ -113,21 +118,21 @@ WiP
 
 ### Run analysis
 
+To run Structure_threader you must specify the following parameters
+
+  - 1st parameter is the DIRECTORY where input files are located
+  - 2nd parameter is the BED file (using PED is not valid for now)
+  - 3rd parameter is the DIRECTORY where output will be written
+  - 4th parameter is the name of the popfile generated with mkPopFile script.
+  - 5th parameter is the number of maximum K:
+
+Example:
+
 ```bash
-# Run Structure_threader 
-# 1st parameter is the BED file (using PED is not valid for now)
-# 2nd parameter is the DIRECTORY where output will be written
-# 3rd and last parameter is the number of Ks:
- ./runFsStrThreader.sh project_input/file.bed project_output/ popfile 24
+ ./runFsStrThreader.sh project_input/ file.bed project_output/ popfile 24
 ```
 
-### Plot results
-
-```bash
-# The Structure_threader already generates a plots subdirectory with HTML/SVG paired files into the output directory
-# However if you whish to generate a "Comparative Plots" output, run the following script
-./runPlotStrThreader project_output/ popfile 24
-```
+The Structure_threader already generates a plots subdirectory with HTML/SVG paired files into the output directory, however this script will also generate a "Comparative Plots" in a comparativePlotAllKs
 
 # Pipeline fastSTRUCTURE with Docker 
 

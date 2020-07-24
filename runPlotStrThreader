@@ -1,8 +1,0 @@
-#!/bin/bash
-
-structure_threader plot \
-        -i "$project_output"\ \
-        -f fastStructure \
-        -K 2 3 4 \
-        -o 2_4_plots \
-        --pop "$pop_file"

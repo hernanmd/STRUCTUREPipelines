@@ -1,19 +1,64 @@
 #!/bin/bash
 
-# Input: PED file name WITHOUT the .ped extension
-# Output: popfile suitable for Structure_threader plots
+set -u  # Check for undefined variables
+set -o errexit    # Used to exit upon error, avoiding cascading errors
+set -o nounset    # Exposes unset variables
+set -eo pipefail # Fail fast and be aware of exit codes
 
-inped="$1"
-popfile="popfile"
-index=1
+print_basic_help() {
+        local program_name=$(basename "$0")
+        printf "Usage: %s <ped_filename> <species_name>\n" "$program_name"
+}
 
-for fam in $(cut -f 1 "$inped".ped | sort | uniq); do
-	# Generate a .log file for each family with count information
-	# It could be done without PLINK but there is no guarantee that pedigree/individual information is sorted
-	echo $fam | plink --file "$inped" --out "$inped"_$fam --cow --make-bed --keep-fam /dev/stdin;
-	# Extract number of individuals remaining from the log file
-	reminds=$(grep "^\--keep-fam" "$inped"_$fam.log | tr -dc '0-9')
-	# Write population file line as described in https://github.com/StuntsPT/Structure_threader/blob/master/docs/usage.md
-	echo -e "$fam\t$reminds\t$index" >> $popfile
-	index=$((index+1))
-done
+print_usage() {
+	cat << EOF
+Generate a population file suitable for Structure_threader analysis
+
+EOF
+
+	print_basic_help
+
+cat << EOF
+
+The options should specify
+
+  - The PED file name WITHOUT the .ped extension
+  - The species name valid for PLINK input
+  - The output file is named popfile
+
+This software is licensed under the MIT License.
+EOF
+}
+
+writePopFile() {
+	local inped="$1"
+	local species="$2"
+	local popfile="popfile"
+	local index=1
+
+	for fam in $(cut -f 1 "$inped".ped | uniq); do
+		tmpFilePrefix="$inped"_$fam
+		# Generate a .log file for each family with count information
+		# It could be done without PLINK but there is no guarantee that pedigree/individual information is sorted
+		echo $fam | plink \
+			--file "$inped" \
+			--out "$tmpFilePrefix" \
+			--"$species" \
+			--make-bed \
+			--keep-fam /dev/stdin
+		# Extract number of individuals remaining from the log file
+		reminds=$(grep "^\--keep-fam" "$tmpFilePrefix".log | tr -dc '0-9')
+		# Write population file line as described in https://github.com/StuntsPT/Structure_threader/blob/master/docs/usage.md
+		echo -e "$fam\t$reminds\t$index" >> "$popfile"
+		# Remove the temporary files
+		rm -f "$tmpFilePrefix".{log,bed,bim,fam,nosex}
+		index=$((index+1))
+	done
+}
+
+main() {
+	[[ $# -ne 2 ]] && { print_usage; exit 1; }
+	writePopFile "$@"
+}
+
+main "$@"
