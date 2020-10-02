@@ -116,6 +116,9 @@ The output directory will be created if not already present.
 
 ### Edit the "mainparams" and optionally the "extraparams" file
 
+  - If you have not mainparams and extraparams files in your input directory, then run the ./runFsStrThreader.sh script to generate a template version of both files.
+  - Edit with your favorite editor: `nano project_input/mainparams`
+
 ### Run analysis
 
 To run Structure_threader you must specify the following parameters
