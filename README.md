@@ -109,9 +109,10 @@ The output directory will be created if not already present.
 
 ```bash
 # Create the required popfile from the PED file. 
-# The input is a PED file name which should be specified WITHOUT the .ped extension
+# The first parameter should be a PED file name which should be specified WITHOUT the .ped extension
+# The second parameter should be the species name (as understood by PLINK): cow, horse, etc.
 # The output is a new file named "popfile" suitable for Structure_threader plots
-./mkPopFile ../STRUCTURE_PIPrun/project_input/file
+./mkPopFile ../STRUCTURE_PIPrun/project_input/file species
 ```
 
 ### Edit the "mainparams" and optionally the "extraparams" file
@@ -135,7 +136,7 @@ Example:
  ./runFsStrThreader.sh project_input/ file.bed project_output/ popfile 24
 ```
 
-The Structure_threader already generates a plots subdirectory with HTML/SVG paired files into the output directory, however this script will also generate a "Comparative Plots" in a comparativePlotAllKs
+The Structure_threader already generates a plots subdirectory with HTML/SVG paired files into the output directory, however this script will also generate a "Comparative Plots" in a comparativePlotAllKs directory
 
 # Pipeline fastSTRUCTURE with Docker 
 
